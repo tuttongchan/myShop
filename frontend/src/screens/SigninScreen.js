@@ -26,6 +26,12 @@ export default function SigninScreen(props) {
       props.history.push(redirect);
     }
   }, [props.history, redirect, userInfo]);
+
+  const guestLoginHandler = (e) => {
+    e.preventDefault();
+    dispatch(signin('guest@example.com', '123'));
+  };
+
   return (
     <div>
       <form className="form" onSubmit={submitHandler}>
@@ -54,17 +60,22 @@ export default function SigninScreen(props) {
             onChange={(e) => setPassword(e.target.value)}
           ></input>
         </div>
+        <div></div>
         <div>
           <label />
-          <button className="primary" type="submit">
+          <button className="primary" type="submit" style={{marginBottom: '1rem'}}>
             Sign In
           </button>
+          <button className="primary" onClick={guestLoginHandler}>Guest Sign In</button>
         </div>
         <div>
           <label />
           <div>
             New customer?{' '}
-            <Link style={{ color: 'black' }} to={`/register?redirect=${redirect}`}>
+            <Link
+              style={{ color: 'black' }}
+              to={`/register?redirect=${redirect}`}
+            >
               Create your account here!
             </Link>
           </div>
