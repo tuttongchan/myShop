@@ -83,7 +83,6 @@ export default function OrderScreen(props) {
         <div className="col-2">
           <ul>
             <li>
-              <div className="card card-body">
                 <h2>Shipping</h2>
                 <p>
                   <strong>Name:</strong> {order.shippingAddress.fullName} <br />
@@ -99,10 +98,8 @@ export default function OrderScreen(props) {
                 ) : (
                   <MessageBox variant="danger">Not Delivered</MessageBox>
                 )}
-              </div>
             </li>
             <li>
-              <div className="card card-body">
                 <h2>Payment</h2>
                 <p>
                   <strong>Method:</strong> {order.paymentMethod}
@@ -114,10 +111,8 @@ export default function OrderScreen(props) {
                 ) : (
                   <MessageBox variant="danger">Not Paid</MessageBox>
                 )}
-              </div>
             </li>
             <li>
-              <div className="card card-body">
                 <h2>Order Items</h2>
                 <ul>
                   {order.orderItems.map((item) => (
@@ -131,7 +126,7 @@ export default function OrderScreen(props) {
                           ></img>
                         </div>
                         <div className="min-30">
-                          <Link to={`/product/${item.product}`}>
+                          <Link className='black' to={`/product/${item.product}`}>
                             {item.name}
                           </Link>
                         </div>
@@ -143,12 +138,10 @@ export default function OrderScreen(props) {
                     </li>
                   ))}
                 </ul>
-              </div>
             </li>
           </ul>
         </div>
-        <div className="col-1">
-          <div className="card card-body">
+        <div className="col-1" style={{ marginLeft: '1rem'}}>
             <ul>
               <li>
                 <h2>Order Summary</h2>
@@ -216,7 +209,6 @@ export default function OrderScreen(props) {
                 </li>
               )}
             </ul>
-          </div>
         </div>
       </div>
     </div>

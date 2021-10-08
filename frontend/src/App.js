@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import { signout } from './actions/userActions';
@@ -24,29 +24,31 @@ function App() {
   const { cartItems } = cart;
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
+
   const dispatch = useDispatch();
   const signoutHandler = () => {
     dispatch(signout());
   };
+
   return (
     <BrowserRouter>
       <div className="grid-container">
         <header className="row">
           <div>
             <Link className="brand" to="/">
-              amazona
+              myshop
             </Link>
           </div>
           <div>
-            <Link to="/cart">
-              Cart
+            <Link className="black" to="/cart">
+              <i className="fas fa-shopping-cart"></i>
               {cartItems.length > 0 && (
-                <span className="badge">{cartItems.length}</span>
+                <span className="badge black">{cartItems.length}</span>
               )}
             </Link>
             {userInfo ? (
               <div className="dropdown">
-                <Link to="#">
+                <Link className="black" to="#">
                   {userInfo.name} <i className="fa fa-caret-down"></i>{' '}
                 </Link>
                 <ul className="dropdown-content">
@@ -64,11 +66,13 @@ function App() {
                 </ul>
               </div>
             ) : (
-              <Link to="/signin">Sign In</Link>
+              <Link className="black" to="/signin">
+                Sign In
+              </Link>
             )}
             {userInfo && userInfo.isAdmin && (
-              <div className="dropdown">
-                <Link to="#admin">
+              <div className="dropdown ">
+                <Link className="black" to="#admin">
                   Admin <i className="fa fa-caret-down"></i>
                 </Link>
                 <ul className="dropdown-content">
@@ -88,6 +92,7 @@ function App() {
               </div>
             )}
           </div>
+          <div className="line"></div>
         </header>
         <main>
           <Route path="/cart/:id?" component={CartScreen}></Route>

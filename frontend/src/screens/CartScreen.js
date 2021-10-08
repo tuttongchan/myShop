@@ -47,7 +47,7 @@ export default function CartScreen(props) {
                     ></img>
                   </div>
                   <div className="min-30">
-                    <Link to={`/product/${item.product}`}>{item.name}</Link>
+                    <Link className='black' to={`/product/${item.product}`}>{item.name}</Link>
                   </div>
                   <div>
                     <select
