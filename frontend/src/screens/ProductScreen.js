@@ -27,7 +27,7 @@ export default function ProductScreen(props) {
       ) : (
         <div>
           <Link className="black" to="/">
-            <i class="fas fa-arrow-left" style={{ marginRight: '.6rem'}}></i>
+            <i className="fas fa-arrow-left" style={{ marginRight: '.6rem'}}></i>
             Back to result
           </Link>
           <div className="row top">
