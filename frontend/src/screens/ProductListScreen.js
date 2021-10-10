@@ -52,10 +52,15 @@ export default function ProductListScreen(props) {
     dispatch(createProduct());
   };
   return (
-    <div>
-      <div className="row">
+    <div style={{padding: '2rem'}}>
+      <div className="row logo">
         <h1>Products</h1>
-        <button type="button" className="primary" onClick={createHandler}>
+        <button
+          style={{ marginBottom: '.5rem' }}
+          type="button"
+          className="primary"
+          onClick={createHandler}
+        >
           Create Product
         </button>
       </div>

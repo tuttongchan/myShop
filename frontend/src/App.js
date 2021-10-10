@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import { signout } from './actions/userActions';
@@ -36,7 +36,11 @@ function App() {
         <header className="row">
           <div>
             <Link className="brand" to="/">
-              myshop
+              mygargage
+              <i
+                className="fas fa-warehouse"
+                style={{ marginLeft: '.8rem' }}
+              ></i>
             </Link>
           </div>
           <div>
@@ -76,18 +80,12 @@ function App() {
                   Admin <i className="fa fa-caret-down"></i>
                 </Link>
                 <ul className="dropdown-content">
-                  {/* <li>
-                    <Link to="/dashboard">Dashboard</Link>
-                  </li> */}
                   <li>
                     <Link to="/productlist">Products</Link>
                   </li>
                   <li>
                     <Link to="/orderlist">Orders</Link>
                   </li>
-                  {/* <li>
-                    <Link to="/userlist">Users</Link>
-                  </li> */}
                 </ul>
               </div>
             )}
