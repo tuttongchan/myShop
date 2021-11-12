@@ -9,8 +9,28 @@ const productRouter = express.Router();
 productRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
-    const products = await Product.find({});
+    const name = req.query.name || '';
+
+    const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {};
+
+    const products = await Product.find({
+      ...nameFilter,
+    });
+
     res.send(products);
+
+    // --------------------------- 2ND WAY
+    // const { name } = req.query;
+    // const queryObject = {};
+    // if (name) {
+    //   queryObject.name = name;
+    // }
+    // console.log(queryObject)
+    // const products = await Product.find(queryObject);
+    // res.send({ products, nbHits: products.length });
+    // --------------------- OG WAY
+    // const products = await Product.find({});
+    // res.send(products);
   })
 );
 

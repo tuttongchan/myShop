@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import { signout } from './actions/userActions';
@@ -20,6 +20,8 @@ import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
 
 function App() {
+  // const [searchTerm, setSearchTerm] = useState('');
+
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
   const userSignin = useSelector((state) => state.userSignin);
@@ -29,6 +31,14 @@ function App() {
   const signoutHandler = () => {
     dispatch(signout());
   };
+
+  // const searchHandler = (e) => {
+  //   if (window.location.href !== 'http://localhost:3000/') {
+  //     window.location.replace('/');
+  //   }
+  //   console.log(window.location.href);
+  //   setSearchTerm(e.target.value);
+  // };
 
   return (
     <BrowserRouter>
@@ -44,6 +54,14 @@ function App() {
             </Link>
           </div>
           <div>
+            <i className="fa-solid fa-xmark"></i>
+            <input
+              type="text"
+              className="topbar-input"
+              placeholder="Search product..."
+              // onChange={searchHandler}
+            />
+            <i className="fas fa-search"></i>
             <Link className="black" to="/cart">
               <i className="fas fa-shopping-cart"></i>
               {cartItems.length > 0 && (
@@ -53,7 +71,7 @@ function App() {
             {userInfo ? (
               <div className="dropdown">
                 <Link className="black" to="#">
-                  {userInfo.name} <i className="fa fa-caret-down"></i>{' '}
+                  {userInfo.name} <i className="fa fa-caret-down"></i>
                 </Link>
                 <ul className="dropdown-content">
                   <li>
@@ -120,6 +138,17 @@ function App() {
             component={OrderListScreen}
           ></AdminRoute>
           <Route path="/" component={HomeScreen} exact></Route>
+          {/* <Route
+            path="/"
+            render={(props) => (
+              <HomeScreen
+                {...props}
+                // searchTerm={searchTerm}
+                // setSearchTerm={setSearchTerm}
+              />
+            )}
+            exact
+          ></Route> */}
         </main>
         <footer className="row center">All right reserved</footer>
       </div>

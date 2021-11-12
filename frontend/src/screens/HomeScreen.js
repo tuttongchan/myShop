@@ -6,7 +6,7 @@ import MessageBox from '../components/MessageBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 
-export default function HomeScreen() {
+export default function HomeScreen({ searchTerm }) {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
@@ -26,6 +26,19 @@ export default function HomeScreen() {
           {products.map((product) => (
             <Product key={product._id} product={product}></Product>
           ))}
+          {/* {products
+            .filter((product) => {
+              if (searchTerm === '') {
+                return product;
+              } else if (
+                product.name.toLowerCase().includes(searchTerm.toLowerCase())
+              ) {
+                return product;
+              }
+            })
+            .map((product, i) => (
+              <Product key={product._id} product={product}></Product>
+            ))} */}
         </div>
       )}
     </div>

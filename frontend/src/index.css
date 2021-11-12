@@ -82,6 +82,20 @@ button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.fa-xmark{
+  font-size: 2rem;
+  margin-right: 1rem;
+}
+.topbar-input {
+  padding: .4rem .8rem;
+  margin-right: 1rem;
+  border-radius: 1.3rem;
+  border: 0.1rem #000 solid;
+  font-size: 1.5rem;
+  font-family: 'Anton', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 button {
   background-color: #f8f8f8;
   cursor: pointer;
