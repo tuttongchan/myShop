@@ -17,12 +17,15 @@ import {
   PRODUCT_UPDATE_SUCCESS,
 } from '../constants/productConstants';
 
-export const listProducts = () => async (dispatch) => {
+// export const listProducts = ({ name = '' }) => async (dispatch) => {
+// export const listProducts = () => async (dispatch) => {1
+export const listProducts = (search) => async (dispatch) => {
   dispatch({
     type: PRODUCT_LIST_REQUEST,
   });
   try {
-    const { data } = await Axios.get('/api/products');
+    // const { data } = await Axios.get('/api/products');
+    const { data } = await Axios.get(`/api/products?name=${search}`);
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message });
@@ -98,7 +101,7 @@ export const deleteProduct = (productId) => async (dispatch, getState) => {
     const { data } = Axios.delete(`/api/products/${productId}`, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
-    dispatch({type: PRODUCT_DELETE_SUCCESS, payload: data})
+    dispatch({ type: PRODUCT_DELETE_SUCCESS, payload: data });
   } catch (error) {
     const message =
       error.response && error.response.data.message

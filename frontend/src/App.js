@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter, Link, Route } from 'react-router-dom';
+import { BrowserRouter, Link, Route, useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router';
 import { signout } from './actions/userActions';
 import AdminRoute from './components/AdminRoute';
 import PrivateRoute from './components/PrivateRoute';
@@ -18,9 +19,13 @@ import ProfileScreen from './screens/ProfileScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
+import SearchScreen from './screens/SearchScreen';
+import SearchBox from './components/SearchBox';
 
 function App() {
-  // const [searchTerm, setSearchTerm] = useState('');
+  // let history = useHistory();
+
+  const [search, setSearch] = useState('');
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
@@ -40,6 +45,13 @@ function App() {
   //   setSearchTerm(e.target.value);
   // };
 
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   // props.history.push(`/products/${search}`);
+  //   // window.location.replace(`/products/${search}`);
+  //   history.push(`/`);
+  // };
+
   return (
     <BrowserRouter>
       <div className="grid-container">
@@ -53,15 +65,26 @@ function App() {
               ></i>
             </Link>
           </div>
-          <div>
-            <i className="fa-solid fa-xmark"></i>
-            <input
-              type="text"
-              className="topbar-input"
-              placeholder="Search product..."
-              // onChange={searchHandler}
-            />
-            <i className="fas fa-search"></i>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Route
+              render={({ history }) => (
+                <SearchBox history={history} search={search} setSearch={setSearch}></SearchBox>
+                // <SearchBox history={history}></SearchBox>
+              )}
+            ></Route>
+            {/* <form onSubmit={submitHandler}>
+              <i className="fa-solid fa-xmark"></i>
+              <input
+                type="text"
+                className="topbar-input"
+                placeholder="Search product..."
+                onChange={(e) => setSearch(e.target.value)}
+                // onChange={searchHandler}
+              />
+              <button type="submit">
+                <i className="fas fa-search"></i>
+              </button>
+            </form> */}
             <Link className="black" to="/cart">
               <i className="fas fa-shopping-cart"></i>
               {cartItems.length > 0 && (
@@ -137,18 +160,22 @@ function App() {
             path="/orderlist"
             component={OrderListScreen}
           ></AdminRoute>
-          <Route path="/" component={HomeScreen} exact></Route>
-          {/* <Route
+          {/* <Route path="/search" component={SearchScreen} exact></Route> */}
+          {/* <Route path="/" component={HomeScreen} exact></Route> */}
+          <Route
             path="/"
             render={(props) => (
-              <HomeScreen
-                {...props}
-                // searchTerm={searchTerm}
-                // setSearchTerm={setSearchTerm}
-              />
+              <HomeScreen {...props} search={search} setSearch={setSearch} />
             )}
             exact
-          ></Route> */}
+          ></Route>
+          <Route
+            path="/products/:name?"
+            render={(props) => (
+              <SearchScreen {...props} search={search} setSearch={setSearch} />
+            )}
+            exact
+          ></Route>
         </main>
         <footer className="row center">All right reserved</footer>
       </div>
